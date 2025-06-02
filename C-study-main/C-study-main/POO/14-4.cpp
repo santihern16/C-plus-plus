@@ -18,7 +18,6 @@ void doSomething(const Date& date){
 }
 
 int main() {
-
     const Date today{23,03, 25}; // using const Must be initialized 
     Date yesterday{22, 03, 25}; // using object without const
 
