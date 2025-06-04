@@ -18,6 +18,15 @@ void printNumbers(int start, int end)
     }
 }
 
+/**
+ * @brief Prompts the user to input two integers representing the start and end numbers.
+ *
+ * This function asks the user to enter values for the start and end numbers via standard input.
+ * If the user enters invalid input (non-integer), an error message is displayed and the program exits.
+ *
+ * @param[out] start Reference to an integer where the user's input for the start number will be stored.
+ * @param[out] end Reference to an integer where the user's input for the end number will be stored.
+ */
 void askNumbers(int& start, int& end)
 {
     std::cout << "Start number: ";
