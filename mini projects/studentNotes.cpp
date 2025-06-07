@@ -1,6 +1,6 @@
 #include <iostream>
 
-double ingresarNotas(int materias)
+double ingresarNotas(const int materias)
 {
     double sum{0};
     for (size_t i = 0; i < materias; i++)
