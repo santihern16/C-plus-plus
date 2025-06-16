@@ -1,5 +1,11 @@
 #include <iostream>
 #include <cstdlib>
+#include <limits>
+#include <random>
+
+constexpr std::size_t MAX_CHARS{10000};
+constexpr std::size_t NUM_MIN{1};
+constexpr std::size_t NUM_MAX{100};
 
 /**
  * @brief Entry point for the Number Guessing Game.
@@ -12,20 +18,38 @@
  *
  * @return int Exit status of the program.
  */
-int main()
-{
-    int num;
-    int guess;
-    int try_number;
 
-    std::cout << "****NUMBER GUESSING GAME****\n";
-    srand(time(0));
-    num = (rand() % 100) + 1;
+int generateRandomNumber()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(NUM_MIN, NUM_MAX);
+
+    return distrib(gen);
+}
+
+void userGuess()
+{
+    int guess{0};
+    int try_number{0};
+    int num = generateRandomNumber();
 
     do
     {
         std::cout << "Guess the number!: ";
-        std::cin >> guess;
+
+        if (!(std::cin >> guess))
+        {
+            std::cout << "Please enter a valid number between 1 and 100!" << std::endl;
+            std::cin.clear(); // Limpiar el error
+            // version compleja de: Descarta todos los caracteres hasta encontrar un Enter
+            // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Versión más simple de ignore (descarta hasta 1000 caracteres o hasta Enter)
+            std::cin.ignore(MAX_CHARS, '\n');
+
+            continue;
+        }
 
         try_number++;
 
@@ -43,4 +67,10 @@ int main()
         }
 
     } while (guess != num);
+}
+
+int main()
+{
+    std::cout << "****NUMBER GUESSING GAME****\n";
+    userGuess();
 }
