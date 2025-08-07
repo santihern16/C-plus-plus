@@ -4,13 +4,13 @@
 
 int main()
 {
-    size_t count{10};
+    size_t count{11};
     size_t numerosPares{0};
     size_t numerosImpares{0};
 
-    for (size_t i = 0; i < count; i++)
+    for (size_t i = 1; i < count; i++)
     {
-        std::cout << "Ingresa un numero: ";
+        std::cout << "Num " << i << ": ";
         int num{0};
         std::cin >> num;
 
@@ -26,6 +26,6 @@ int main()
         }
     }
 
-    std::cout << "\nCantidad de números pares: " << numerosPares << std::endl;
-    std::cout << "Cantidad de números impares: " << numerosImpares << std::endl;
+    std::cout << "\nCantidad de numeros pares: " << numerosPares << std::endl;
+    std::cout << "Cantidad de numeros impares: " << numerosImpares << std::endl;
 }
