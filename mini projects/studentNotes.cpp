@@ -18,7 +18,7 @@ double ingresarNotas(const int materias)
 
 int main()
 {
-    int materias{6};
+    constexpr int materias{6};
     double sum = ingresarNotas(materias);
     double average = sum / materias;
 
