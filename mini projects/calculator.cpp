@@ -77,12 +77,14 @@ float sum(const std::vector<float> &numbers) //We pass the value as a reference 
     return total;
 }
 
-float rest(const std::vector<float> &numbers){
-    float total{0};
-    for (auto &&i : numbers)
+float rest(std::vector<float> &numbers)
+{
+    if (numbers.empty()) return 0; // empty vector validation
+
+    float total = numbers[0];//total is the first element
+    for (size_t i = 1; i < numbers.size(); i++) //for loop starts at 1 until the size of numbers
     {
-        total -=i;
-        std::cout << i << "\n";
+        total -= numbers[i]; //we substract numbers[0] - numbers[1] 
     }
     return total;
 }
