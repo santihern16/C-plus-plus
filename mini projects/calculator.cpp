@@ -76,6 +76,24 @@ float sum(const std::vector<float> &numbers) //We pass the value as a reference 
     return total;
 }
 
+bool askNumber(std::vector<float> &numbers)
+{
+    float num{0};
+    std::cout << "Add a number: " << std::endl;
+    if (std::cin >> num)
+    {
+        numbers.push_back(num);
+        return true;
+    }
+    else
+    {
+        std::cout << "Invalid number, retrying...\n";
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        return false;
+    }
+}
+
 int main()
 {
     std::vector<float> numbers;
@@ -96,19 +114,12 @@ int main()
             break;
         }        
         
-        float num{0};
         for (size_t i = 0; i < count; i++)
         {
-            std::cout << "Add a number: " << std::endl;
-            if (std::cin >> num)
+            if (!askNumber(numbers))
             {
-                numbers.push_back(num);
-            }else{
-                std::cout << "Invalid number, retrying...\n";
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
                 i--;
-            }
+            }           
         }
         std::cout << "Result Sum: " << sum(numbers) << std::endl;
         break;
