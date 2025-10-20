@@ -38,7 +38,7 @@ bool getValidCount(size_t &count)
     std::cout << "How many numbers do you want to operate?\n:";
     if (!(std::cin >> count))
     {
-        std::cout << "Inalid input\n";
+        std::cout << "Invalid input\n";
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         return false;
@@ -53,29 +53,22 @@ bool getValidCount(size_t &count)
 }
 
 /**
- * @brief Compute and print the sum of the given numbers.
+ * @brief Compute the sum of all values in a collection of floats.
  *
- * Iterates over the supplied vector of floats, accumulates their total in a
- * local float variable and prints the result to std::cout in the form:
- * "Result Sum: <total>\n".
+ * @param numbers Const reference to a std::vector<float> containing the values to sum.
+ *                Passing by const reference avoids copying the container.
+ * @return float The total sum of all elements in 'numbers'. Returns 0.0f if the vector is empty.
  *
- * @param numbers const reference to a std::vector<float> containing the values
- *                to be summed. The container is not modified.
+ * @details The implementation iterates the container using a range-based for loop
+ *          and accumulates each element into a local float accumulator.
  *
- * @note The accumulation uses a float accumulator; for higher precision or
- *       reduced rounding error consider using a double accumulator or
- *       std::accumulate with a wider type.
- * @note Time complexity: O(N), where N is numbers.size(). Additional space:
- *       O(1).
- * @note This function performs output to std::cout. It may interact with
- *       global I/O state and is not thread-safe with respect to concurrent
- *       writes to std::cout unless the caller provides synchronization.
- * @warning No error reporting for I/O failures; printing failures (e.g.,
- *          exceptions from the stream when exceptions are enabled) are not handled.
+ * @complexity O(n) time complexity, where n is numbers.size(); O(1) additional space.
+ * @thread-safety Callable concurrently only if the referenced vector is not modified
+ *                 by other threads during the call.
  */
 float sum(const std::vector<float> &numbers) //We pass the value as a reference - Numbers is the ALIAS
 {
-    float total = 0;
+    float total{0};
     for (auto &&i : numbers)
     {   
         total += i;
@@ -110,6 +103,11 @@ int main()
             if (std::cin >> num)
             {
                 numbers.push_back(num);
+            }else{
+                std::cout << "Invalid number, retrying...\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                i--;
             }
         }
         std::cout << "Result Sum: " << sum(numbers) << std::endl;
