@@ -83,6 +83,7 @@ bool askNumber(std::vector<float> &numbers)
     std::cout << "Add a number: " << std::endl;
     if (std::cin >> num)
     {
+        std::cin.ignore(10000, '\n');//We ignore again the buffer to avoid issues with the input
         numbers.push_back(num);
         return true;
     }
@@ -104,7 +105,7 @@ int main()
     size_t option;
     std::cout << "Choose your operation\n1. Sum\n2. Rest\n:";
     std::cin >> option;
-    std::cin.ignore(10000, '\n');//We ignore ean again the buffer to avoid issues with the input
+    std::cin.ignore(10000, '\n');//We ignore (again) the buffer input
     
     size_t count = getValidCount();
 
