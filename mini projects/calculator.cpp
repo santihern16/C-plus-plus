@@ -69,6 +69,8 @@ size_t getValidCount()
  */
 float sum(const std::vector<float> &numbers) //We pass the value as a reference - Numbers is the ALIAS
 {
+    if (numbers.empty()) return 0;
+
     float total{0};
     for (auto &&i : numbers)
     {   
@@ -77,14 +79,26 @@ float sum(const std::vector<float> &numbers) //We pass the value as a reference 
     return total;
 }
 
-float rest(std::vector<float> &numbers)
+float subtract(const std::vector<float> &numbers)
 {
     if (numbers.empty()) return 0; // empty vector validation
 
-    float total = numbers[0];//total is the first element
-    for (size_t i = 1; i < numbers.size(); i++) //for loop starts at 1 until the size of numbers
+    float total = numbers[0]; // total is the first element
+    for (size_t i = 1; i < numbers.size(); ++i) // for loop starts at 1 until the size of numbers
     {
-        total -= numbers[i]; //we substract numbers[0] - numbers[1] 
+        total -= numbers[i];
+    }
+    return total;
+}
+
+float mult(const std::vector<float> &numbers)
+{
+    if (numbers.empty()) return 0;
+
+    float total = numbers[0];
+    for (size_t i = 1; i < numbers.size(); i++)
+    {
+        total *= numbers[i]; 
     }
     return total;
 }
@@ -115,7 +129,7 @@ int main()
     std::cout << "Calculator App" << std::endl;
 
     size_t option;
-    std::cout << "Choose your operation\n1. Sum\n2. Rest\n:";
+    std::cout << "Choose your operation\n1. Sum\n2. Rest\n3. Multiplication\n:";
     std::cin >> option;
     std::cin.ignore(10000, '\n');//We ignore (again) the buffer input
     
@@ -137,7 +151,7 @@ int main()
         break;
     }
     case 2:{
-        std::cout << "****Rest****\n";     
+        std::cout << "****Subtract****\n";     
         for (size_t i = 0; i < count; i++)
         {
             if (!askNumber(numbers))
@@ -145,8 +159,20 @@ int main()
                 i--;
             }
         }
-        std::cout << "Result Rest: " << rest(numbers) << std::endl;   
+        std::cout << "Result Subtract: " << subtract(numbers) << std::endl;   
         break;
+    }
+    case 3:
+    {
+        std::cout << "****Multiplication****\n";
+        for (size_t i = 0; i < count; i++)
+        {
+            if (!askNumber(numbers))
+            {
+                i--;
+            }            
+        }
+        std::cout << "Result Multiplication: " << mult(numbers) << std::endl;
     }
     default:
         std::cout << "Choose a valid option\n";
