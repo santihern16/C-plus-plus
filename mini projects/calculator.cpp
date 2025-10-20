@@ -33,23 +33,24 @@ Gotta have in count the operations order
  * @param[out] count Reference to a size_t that will receive the user-entered count on success.
  * @return true if a positive count was successfully read from input; false otherwise.
  */
-bool getValidCount(size_t &count)
+size_t getValidCount()
 {
+    size_t count{0};
     std::cout << "How many numbers do you want to operate?\n:";
     if (!(std::cin >> count))
     {
         std::cout << "Invalid input\n";
         std::cin.clear();
         std::cin.ignore(10000, '\n');
-        return false;
+        return 0;
     }
 
     if (count == 0)
     {
         std::cout << "The number must be greater than 0\n";
-        return false;
+        return 0;
     }
-    return true;
+    return count;
 }
 
 /**
@@ -101,27 +102,27 @@ int main()
     std::cout << "Calculator App" << std::endl;
 
     size_t option;
-    std::cout << "Choose your operation\n 1. Sum\n:";
+    std::cout << "Choose your operation\n1. Sum\n2. Rest\n:";
     std::cin >> option;
+
+    size_t count = getValidCount();
 
     switch (option)
     {
     case 1:
-    {
-        size_t count{0};        
-        if (!getValidCount(count))
-        {
-            break;
-        }        
-        
+    {       
         for (size_t i = 0; i < count; i++)
         {
             if (!askNumber(numbers))
             {
-                i--;
+                i--; //If the function returns false, means that it failed, we denied the false to convert it to true and reset the for interaction.
             }           
         }
         std::cout << "Result Sum: " << sum(numbers) << std::endl;
+        break;
+    }
+    case 2:{
+        std::cout << "Second Case (Rest)\n";
         break;
     }
     default:
