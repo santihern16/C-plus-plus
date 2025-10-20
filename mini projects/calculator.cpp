@@ -50,17 +50,37 @@ bool getValidCount(size_t &count)
         return false;
     }
     return true;
-    
 }
 
-void sum(const std::vector<float> &numbers) //We pass the value as a reference - Numbers is the ALIAS
+/**
+ * @brief Compute and print the sum of the given numbers.
+ *
+ * Iterates over the supplied vector of floats, accumulates their total in a
+ * local float variable and prints the result to std::cout in the form:
+ * "Result Sum: <total>\n".
+ *
+ * @param numbers const reference to a std::vector<float> containing the values
+ *                to be summed. The container is not modified.
+ *
+ * @note The accumulation uses a float accumulator; for higher precision or
+ *       reduced rounding error consider using a double accumulator or
+ *       std::accumulate with a wider type.
+ * @note Time complexity: O(N), where N is numbers.size(). Additional space:
+ *       O(1).
+ * @note This function performs output to std::cout. It may interact with
+ *       global I/O state and is not thread-safe with respect to concurrent
+ *       writes to std::cout unless the caller provides synchronization.
+ * @warning No error reporting for I/O failures; printing failures (e.g.,
+ *          exceptions from the stream when exceptions are enabled) are not handled.
+ */
+float sum(const std::vector<float> &numbers) //We pass the value as a reference - Numbers is the ALIAS
 {
     float total = 0;
     for (auto &&i : numbers)
     {   
         total += i;
     }
-    std::cout << "Result Sum: " << total << std::endl;
+    return total;
 }
 
 int main()
@@ -92,8 +112,7 @@ int main()
                 numbers.push_back(num);
             }
         }
-        sum(numbers);
-
+        std::cout << "Result Sum: " << sum(numbers) << std::endl;
         break;
     }
     default:
