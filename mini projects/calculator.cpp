@@ -13,25 +13,25 @@ Gotta have in count the operations order
 
 
 /**
- * @brief Prompt the user to enter how many numbers they want to operate on and validate the input.
+ * Prompt the user for how many numbers they want to operate on and validate the response.
  *
- * This function prints a prompt to std::cout and attempts to read an unsigned integer
- * value into the reference parameter @p count from std::cin. It validates that the
- * extraction succeeded and that the entered value is greater than zero.
+ * This function:
+ *  - Prompts the user via std::cout.
+ *  - Attempts to read a size_t from std::cin.
+ *  - If extraction fails (non-numeric input), prints an error message, clears std::cin state,
+ *    and returns 0.
+ *  - After a successful extraction, discards up to 10000 characters or until a newline from
+ *    the input buffer (std::cin.ignore) to prevent leftover characters (e.g., a decimal point
+ *    and fractional part) from affecting subsequent input operations.
+ *  - If the entered count is 0, prints an error message and returns 0.
  *
- * On failure to parse a numeric value, the function:
- *  - prints an error message,
- *  - clears the std::cin error state,
- *  - discards up to 10,000 characters or until a newline from the input buffer,
- *  - and returns false.
+ * Side effects:
+ *  - Writes prompts and error messages to std::cout.
+ *  - Reads from std::cin and may call std::cin.clear() and std::cin.ignore().
  *
- * If a numeric value is read but equals zero, the function prints an error message
- * and returns false (the value of @p count will be zero in this case).
- *
- * On success, @p count is set to the entered positive value and the function returns true.
- *
- * @param[out] count Reference to a size_t that will receive the user-entered count on success.
- * @return true if a positive count was successfully read from input; false otherwise.
+ * Returns:
+ *  - A positive size_t representing the validated count on success.
+ *  - 0 if input extraction fails or if the user enters 0.
  */
 size_t getValidCount()
 {
@@ -41,9 +41,9 @@ size_t getValidCount()
     {
         std::cout << "Invalid input\n";
         std::cin.clear();
-        std::cin.ignore(10000, '\n');
         return 0;
     }
+    std::cin.ignore(10000, '\n'); //Line added outside the if, to clear the input buffer and avoid decimals from going in the next line.
 
     if (count == 0)
     {
@@ -104,7 +104,8 @@ int main()
     size_t option;
     std::cout << "Choose your operation\n1. Sum\n2. Rest\n:";
     std::cin >> option;
-
+    std::cin.ignore(10000, '\n');//We ignore ean again the buffer to avoid issues with the input
+    
     size_t count = getValidCount();
 
     switch (option)
