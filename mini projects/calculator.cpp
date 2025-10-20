@@ -77,6 +77,16 @@ float sum(const std::vector<float> &numbers) //We pass the value as a reference 
     return total;
 }
 
+float rest(const std::vector<float> &numbers){
+    float total{0};
+    for (auto &&i : numbers)
+    {
+        total -=i;
+        std::cout << i << "\n";
+    }
+    return total;
+}
+
 bool askNumber(std::vector<float> &numbers)
 {
     float num{0};
@@ -113,6 +123,7 @@ int main()
     {
     case 1:
     {       
+        std::cout << "****Sum****\n";
         for (size_t i = 0; i < count; i++)
         {
             if (!askNumber(numbers))
@@ -124,7 +135,15 @@ int main()
         break;
     }
     case 2:{
-        std::cout << "Second Case (Rest)\n";
+        std::cout << "****Rest****\n";     
+        for (size_t i = 0; i < count; i++)
+        {
+            if (!askNumber(numbers))
+            {
+                i--;
+            }
+        }
+        std::cout << "Result Rest: " << rest(numbers) << std::endl;   
         break;
     }
     default:
