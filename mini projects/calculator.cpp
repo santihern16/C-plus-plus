@@ -225,5 +225,6 @@ int main()
     std::cin >> choice;
 
     } while (exitMenu(choice));
+
     return 0;
 }
