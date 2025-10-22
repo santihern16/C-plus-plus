@@ -137,8 +137,19 @@ bool askNumber(std::vector<float> &numbers)
     }
 }
 
+bool exitMenu(const char &option){
+    if (option == 'y' || option == 'Y')
+    {
+        return true;
+    }
+    return false;
+}
+
 int main()
 {
+    char choice;
+    do
+    {
     std::vector<float> numbers;
 
     std::cout << "Calculator App" << std::endl;
@@ -209,5 +220,10 @@ int main()
         std::cout << "Choose a valid option\n";
         break;
     }
+
+    std::cout << "Would you like to continue? (y/n): ";
+    std::cin >> choice;
+
+    } while (exitMenu(choice));
     return 0;
 }
