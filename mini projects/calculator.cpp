@@ -14,28 +14,6 @@ div:
     num1 / num2 / num3 = result
 */
 
-
-/**
- * Prompt the user for how many numbers they want to operate on and validate the response.
- *
- * This function:
- *  - Prompts the user via std::cout.
- *  - Attempts to read a size_t from std::cin.
- *  - If extraction fails (non-numeric input), prints an error message, clears std::cin state,
- *    and returns 0.
- *  - After a successful extraction, discards up to 10000 characters or until a newline from
- *    the input buffer (std::cin.ignore) to prevent leftover characters (e.g., a decimal point
- *    and fractional part) from affecting subsequent input operations.
- *  - If the entered count is 0, prints an error message and returns 0.
- *
- * Side effects:
- *  - Writes prompts and error messages to std::cout.
- *  - Reads from std::cin and may call std::cin.clear() and std::cin.ignore().
- *
- * Returns:
- *  - A positive size_t representing the validated count on success.
- *  - 0 if input extraction fails or if the user enters 0.
- */
 size_t getValidCount()
 {
     size_t count{0};
@@ -56,20 +34,6 @@ size_t getValidCount()
     return count;
 }
 
-/**
- * @brief Compute the sum of all values in a collection of floats.
- *
- * @param numbers Const reference to a std::vector<float> containing the values to sum.
- *                Passing by const reference avoids copying the container.
- * @return float The total sum of all elements in 'numbers'. Returns 0.0f if the vector is empty.
- *
- * @details The implementation iterates the container using a range-based for loop
- *          and accumulates each element into a local float accumulator.
- *
- * @complexity O(n) time complexity, where n is numbers.size(); O(1) additional space.
- * @thread-safety Callable concurrently only if the referenced vector is not modified
- *                 by other threads during the call.
- */
 float sum(const std::vector<float> &numbers) //We pass the value as a reference - Numbers is the ALIAS
 {
     if (numbers.empty()) return 0;
