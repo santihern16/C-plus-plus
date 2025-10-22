@@ -9,6 +9,9 @@ Numbers
 Example:
 num1 * num2 + num3 = result
 Gotta have in count the operations order
+
+div:
+    num1 / num2 / num3 = result
 */
 
 
@@ -91,6 +94,18 @@ float subtract(const std::vector<float> &numbers)
     return total;
 }
 
+float div(const std::vector<float> &numbers)
+{
+    if (numbers.empty()) return 0;
+
+    float result = numbers[0];
+    for (size_t i = 1; i < numbers.size(); i++)
+    {
+        result /= numbers[i];
+    }
+    return result;
+}
+
 float mult(const std::vector<float> &numbers)
 {
     if (numbers.empty()) return 0;
@@ -129,7 +144,7 @@ int main()
     std::cout << "Calculator App" << std::endl;
 
     size_t option;
-    std::cout << "Choose your operation\n1. Sum\n2. Rest\n3. Multiplication\n:";
+    std::cout << "Choose your operation\n1. Sum\n2. Rest\n3. Multiplication\n4. div\n:";
     std::cin >> option;
     std::cin.ignore(10000, '\n');//We ignore (again) the buffer input
     
@@ -150,7 +165,8 @@ int main()
         std::cout << "Result Sum: " << sum(numbers) << std::endl;
         break;
     }
-    case 2:{
+    case 2:
+    {
         std::cout << "****Subtract****\n";     
         for (size_t i = 0; i < count; i++)
         {
@@ -173,7 +189,22 @@ int main()
             }            
         }
         std::cout << "Result Multiplication: " << mult(numbers) << std::endl;
+        break;
     }
+    case 4:
+    {
+        std::cout << "****div****\n";
+        for (size_t i = 0; i < count; i++)
+        {
+            if (!askNumber(numbers))
+            {
+                i--;
+            }   
+        }
+        std::cout << "Result div: " << div(numbers) << std::endl;
+        break;
+    }
+    
     default:
         std::cout << "Choose a valid option\n";
         break;
