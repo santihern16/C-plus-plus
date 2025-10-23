@@ -105,7 +105,12 @@ bool exitMenu(const char &option){
     if (option == 'y' || option == 'Y')
     {
         return true;
+    }else if (option != 'n' && option != 'N')
+    {
+        std::cout << "Please select a valid option" << std::endl;
+        return true;
     }
+    std::cout << "Come back :(" << std::endl;
     return false;
 }
 
@@ -186,7 +191,7 @@ int main()
     }
 
     std::cout << "Would you like to continue? (y/n): ";
-    std::cin >> choice;
+    std::cin >> choice;    
 
     } while (exitMenu(choice));
 
