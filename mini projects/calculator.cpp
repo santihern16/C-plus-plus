@@ -30,6 +30,9 @@ size_t getValidCount()
     {
         std::cout << "The number must be greater than 0\n";
         return 0;
+    }else if(count == 1){
+        std::cout << "Why do you want to operate one number? ._.\n";
+        return 0;
     }
     return count;
 }
@@ -133,33 +136,41 @@ int main()
     switch (option)
     {
     case 1:
-    {       
-        std::cout << "****Sum****\n";
-        for (size_t i = 0; i < count; i++)
+    {
+        if (count != 0) // If 'count' returns 0, it means that the user typed 0 or 1 in getValidCount(), so we wont do this process
         {
-            if (!askNumber(numbers))
+            std::cout << "****Sum****\n";
+            for (size_t i = 0; i < count; i++)
             {
-                i--; //If the function returns false, means that it failed, we denied the false to convert it to true and reset the for interaction.
-            }           
+                if (!askNumber(numbers))
+                {
+                    i--; // If the function returns false, means that it failed, we denied the false to convert it to true and reset the for interaction.
+                }
+            }
+            std::cout << "Result Sum: " << sum(numbers) << std::endl;
         }
-        std::cout << "Result Sum: " << sum(numbers) << std::endl;
         break;
     }
     case 2:
     {
-        std::cout << "****Subtract****\n";     
-        for (size_t i = 0; i < count; i++)
+        if (count != 0)
         {
-            if (!askNumber(numbers))
+            std::cout << "****Subtract****\n";
+            for (size_t i = 0; i < count; i++)
             {
-                i--;
+                if (!askNumber(numbers))
+                {
+                    i--;
+                }
             }
+            std::cout << "Result Subtract: " << subtract(numbers) << std::endl;
         }
-        std::cout << "Result Subtract: " << subtract(numbers) << std::endl;   
         break;
     }
     case 3:
     {
+        if (count != 0)
+        {
         std::cout << "****Multiplication****\n";
         for (size_t i = 0; i < count; i++)
         {
@@ -169,10 +180,13 @@ int main()
             }            
         }
         std::cout << "Result Multiplication: " << mult(numbers) << std::endl;
+        }
         break;
     }
     case 4:
     {
+        if (count != 0)
+        {
         std::cout << "****div****\n";
         for (size_t i = 0; i < count; i++)
         {
@@ -182,6 +196,7 @@ int main()
             }   
         }
         std::cout << "Result div: " << div(numbers) << std::endl;
+        }
         break;
     }
     
