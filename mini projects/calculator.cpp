@@ -204,8 +204,7 @@ int main()
     case 5:
     {
         std::cout << "Exiting the program...\n";
-        break;
-        //return 0;
+        return 0;
     }
     
     default:
