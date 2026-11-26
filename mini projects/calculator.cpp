@@ -127,16 +127,15 @@ int main()
     std::cout << "Calculator App" << std::endl;
 
     size_t option;
-    std::cout << "Choose your operation\n1. Sum\n2. Rest\n3. Multiplication\n4. div\n:";
+    std::cout << "Choose your operation\n1. Sum\n2. Rest\n3. Multiplication\n4. div\n5. Exit\n:";
     std::cin >> option;
     std::cin.ignore(10000, '\n');//We ignore (again) the buffer input
-    
-    size_t count = getValidCount();
 
     switch (option)
     {
     case 1:
     {
+        size_t count = getValidCount();
         if (count != 0) // If 'count' returns 0, it means that the user typed 0 or 1 in getValidCount(), so we wont do this process
         {
             std::cout << "****Sum****\n";
@@ -153,6 +152,7 @@ int main()
     }
     case 2:
     {
+        size_t count = getValidCount();
         if (count != 0)
         {
             std::cout << "****Subtract****\n";
@@ -169,6 +169,7 @@ int main()
     }
     case 3:
     {
+        size_t count = getValidCount();
         if (count != 0)
         {
         std::cout << "****Multiplication****\n";
@@ -185,6 +186,7 @@ int main()
     }
     case 4:
     {
+        size_t count = getValidCount();
         if (count != 0)
         {
         std::cout << "****div****\n";
@@ -198,6 +200,12 @@ int main()
         std::cout << "Result div: " << div(numbers) << std::endl;
         }
         break;
+    }
+    case 5:
+    {
+        std::cout << "Exiting the program...\n";
+        break;
+        //return 0;
     }
     
     default:
